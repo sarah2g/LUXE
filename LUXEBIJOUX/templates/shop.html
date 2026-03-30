@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Luxe Bijoux — Shop{% endblock %}
+
+{% block content %}
+<main>
+  <section class="hero hero-collection" style="background:#f5e8ea;padding:56px 0;margin-bottom:24px;">
+    <div class="container hero-inner">
+      <h1 style="font-size:44px;margin:8px 0;color:#222;font-family:'Playfair Display',serif;text-align:center">Our Collection</h1>
+      <p class="muted" style="text-align:center;max-width:760px;margin:8px auto 0;color:var(--muted)">Discover exquisite pieces that define timeless elegance</p>
+    </div>
+  </section>
+
+  <section class="container" style="padding-bottom:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px">
+      <div class="filters" id="categoryFilters" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-ghost filter-btn" data-category="" aria-pressed="true">All</button>
+        {% for c in categories %}
+          <button class="btn btn-ghost filter-btn" data-category="{{ c.slug }}">{{ c.name }}</button>
+        {% endfor %}
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="color:var(--muted);font-size:14px">Showing {{ products|length }} products</div>
+        <input aria-label="Sort or filter" placeholder="" style="border:0;background:transparent;width:40px;height:36px;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.03);">
+      </div>
+    </div>
+
+    <div class="grid products-grid">
+  {% for p in products %}
+  <article class="card product-card reveal" data-category="{% if p.category %}{{ p.category.slug }}{% else %}{% endif %}">
+        <div class="media" style="background-image: url('{% if p.image %}{{ p.image.url }}{% else %}https://via.placeholder.com/400x280{% endif %}'); background-size:cover; background-position:center; min-height:220px; position:relative;">
+          <form method="post" action="{% url 'app1:wishlist-add' %}" class="wishlist-form" style="display:inline">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ p.pk }}">
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <button class="wishlist icon-btn" aria-label="Add to wishlist" title="Add to favorites" data-product-id="{{ p.pk }}">
+              {% if wishlist_ids and p.pk in wishlist_ids %}
+                <i class="fa-solid fa-heart" aria-hidden="true"></i>
+              {% else %}
+                <i class="fa-regular fa-heart" aria-hidden="true"></i>
+              {% endif %}
+            </button>
+          </form>
+          <div class="card-cta">
+            <form method="post" action="{% url 'app1:add-to-cart' %}">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ p.pk }}">
+              <input type="hidden" name="next" value="{{ request.path }}">
+              <button class="btn btn-primary add-to-cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <div class="card-body">
+          <small class="category">{% if p.category %}{{ p.category.name }}{% else %}-{% endif %}</small>
+          <h3 class="product-title">{{ p.name }}</h3>
+          <p class="price">${{ p.price }}</p>
+        </div>
+      </article>
+      {% empty %}
+      <p>No products found.</p>
+      {% endfor %}
+    </div>
+
+  </section>
+</main>
+{% endblock %}

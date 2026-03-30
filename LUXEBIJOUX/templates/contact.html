@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}Luxe Bijoux — Contact{% endblock %}
+
+{% block content %}
+<section class="hero hero-contact">
+  <div class="container hero-inner reveal">
+    <h1>Get in Touch</h1>
+    <p class="muted">We'd love to hear from you. Let us help you find the perfect piece</p>
+  </div>
+</section>
+
+<section class="container contact-cards-section">
+  <div class="contact-cards">
+    <div class="contact-card reveal">
+      <div class="card-icon"><i class="fa-solid fa-location-dot"></i></div>
+      <h4>Visit Our Boutique</h4>
+      <p class="muted">123 Luxury Avenue<br>New York, NY 10001</p>
+    </div>
+    <div class="contact-card reveal">
+      <div class="card-icon"><i class="fa-solid fa-phone"></i></div>
+      <h4>Call Us</h4>
+      <p class="muted">+1 (555) 123-4567<br>Mon-Sat: 10 AM - 7 PM EST</p>
+    </div>
+    <div class="contact-card reveal">
+      <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
+      <h4>Email Us</h4>
+      <p class="muted">hello@luxebijoux.com<br>We'll respond within 24 hours</p>
+    </div>
+    <div class="contact-card reveal">
+      <div class="card-icon"><i class="fa-solid fa-clock"></i></div>
+      <h4>Opening Hours</h4>
+      <p class="muted">Mon - Sat: 10 AM - 7 PM<br>Sun: 12 PM - 5 PM</p>
+    </div>
+  </div>
+</section>
+
+<section class="container contact-main">
+  <div class="contact-grid">
+    <div class="contact-form-wrap reveal">
+      <h3>Send Us a Message</h3>
+      <p class="muted">Fill out the form below and we'll get back to you as soon as possible</p>
+
+      <form class="contact-form" action="#" method="post">
+        <label class="form-field">
+          <span class="label-text">Full Name *</span>
+          <input type="text" name="name" required>
+        </label>
+
+        <label class="form-field">
+          <span class="label-text">Email Address *</span>
+          <input type="email" name="email" required>
+        </label>
+
+        <label class="form-field">
+          <span class="label-text">Phone Number</span>
+          <input type="tel" name="phone">
+        </label>
+
+        <label class="form-field">
+          <span class="label-text">Subject *</span>
+          <input type="text" name="subject" required>
+        </label>
+
+        <label class="form-field">
+          <span class="label-text">Message *</span>
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+
+        <button class="btn btn-primary btn-send" type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+
+    <aside class="contact-aside reveal">
+      <div class="contact-image reveal"></div>
+      <div class="boutique-card reveal">
+        <h4>Visit Our Boutique</h4>
+        <p class="muted">Experience our collection in person at our flagship boutique in the heart of New York. Our expert consultants are here to help you find the perfect piece or create a custom design just for you.</p>
+        <ul class="muted boutique-list">
+          <li><i class="fa-solid fa-location-dot"></i> 123 Luxury Avenue, New York, NY 10001</li>
+          <li><i class="fa-solid fa-clock"></i> Mon-Sat: 10 AM - 7 PM | Sun: 12 PM - 5 PM</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="faq section-faq">
+  <div class="container">
+    <h3 class="section-title">Frequently Asked Questions</h3>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4>Do you offer custom jewelry design?</h4>
+        <p class="muted">Yes! Our master jewelers can work with you to create a unique, custom piece that perfectly captures your vision. Contact us to schedule a consultation.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>What is your return policy?</h4>
+        <p class="muted">We offer a 30-day return policy for all purchases. Items must be in original condition with all original packaging and documentation.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Do you resize rings?</h4>
+        <p class="muted">Yes, we offer complimentary ring resizing within the first 60 days of purchase. Additional resizing is available for a small fee.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Is international shipping available?</h4>
+        <p class="muted">Yes, we ship worldwide. International orders typically arrive within 7–14 business days. All duties and taxes are the responsibility of the customer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

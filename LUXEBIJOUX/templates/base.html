@@ -1,0 +1,79 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Luxe Bijoux{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body {% block body_attrs %}{% endblock %}>
+  <!-- Shared header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand"><a href="{% url 'app1:index' %}">LUXE <span>Bijoux</span></a></div>
+      <nav class="main-nav" id="mainNav">
+        {% if request.resolver_match %}
+          {% with current=request.resolver_match.url_name %}
+            <a href="{% url 'app1:index' %}" class="{% if current == 'index' %}active{% endif %}">Home</a>
+            <a href="{% url 'app1:shop' %}" class="{% if current == 'shop' %}active{% endif %}">Shop</a>
+            <a href="{% url 'app1:about' %}" class="{% if current == 'about' %}active{% endif %}">About</a>
+            <a href="{% url 'app1:contact' %}" class="{% if current == 'contact' %}active{% endif %}">Contact</a>
+          {% endwith %}
+        {% else %}
+            <a href="{% url 'app1:index' %}">Home</a>
+            <a href="{% url 'app1:shop' %}">Shop</a>
+            <a href="{% url 'app1:about' %}">About</a>
+            <a href="{% url 'app1:contact' %}">Contact</a>
+        {% endif %}
+      </nav>
+
+      <div class="header-actions" aria-label="Header actions">
+       
+  <a href="{% url 'app1:wishlist' %}" class="icon-btn wishlist" aria-label="Wishlist" title="View wishlist"><i class="far fa-heart" aria-hidden="true"></i></a>
+        
+  <a href="{% url 'app1:cart' %}" class="icon-btn cart" aria-label="Cart" title="View cart">
+          <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+          <span class="cart-badge" aria-hidden="true">{{ cart_item_count|default:0 }}</span>
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>LUXE Bijoux</h4>
+        <p>Crafting timeless elegance with every piece. Experience luxury jewelry that tells your unique story.</p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="{% url 'app1:shop' %}">Shop</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="{% url 'app1:about' %}">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact Us</h5>
+        <p>123 Luxury Avenue, New York, NY 10001</p>
+        <p>+1 (555) 123-4567</p>
+        <p>hello@luxebijoux.com</p>
+      </div>
+    </div>
+    <div class="container copyright">© 2026 Luxe Bijoux. All rights reserved.</div>
+  </footer>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

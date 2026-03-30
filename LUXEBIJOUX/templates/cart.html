@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Luxe Bijoux — Cart{% endblock %}
+
+{% block content %}
+<main>
+  <section class="hero hero-cart reveal">
+    <div class="container hero-inner">
+      <div class="hero-icon"><i class="fas fa-shopping-bag" style="font-size:28px;color:var(--gold)"></i></div>
+      <h1>Your Cart</h1>
+      <p class="muted">3 items in your cart</p>
+    </div>
+  </section>
+
+  <section class="container cart-section reveal">
+    <div class="cart-grid">
+      <div class="cart-items">
+        {% if items %}
+          {% for it in items %}
+            <article class="cart-row card">
+              <div class="cart-row-inner">
+                <div class="cart-thumb" style="width:120px;height:92px;border-radius:6px;background-size:cover;background-position:center; background-image: url('{% if it.product.image %}{{ it.product.image.url }}{% else %}https://via.placeholder.com/120x92{% endif %}')" aria-hidden="true"></div>
+                <div class="cart-meta">
+                  <h3 class="cart-title">{{ it.product.name }}</h3>
+                  <p class="muted small">{% if it.product.category %}{{ it.product.category.name }}{% endif %}</p>
+                  <div class="qty-row">
+                    <label class="label-text">Quantity:</label>
+                    <div class="qty-controls">
+                      <form method="post" action="{% url 'app1:update-cart' %}" style="display:flex;align-items:center;gap:8px">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ it.product.pk }}">
+                        <button class="qty-btn" type="button" onclick="this.nextElementSibling.stepDown(); this.form.requestSubmit();" aria-label="Decrease quantity">−</button>
+                        <input type="number" min="1" name="quantity" value="{{ it.quantity }}" aria-label="Quantity" class="qty-input" style="width:72px">
+                        <button class="qty-btn" type="button" onclick="this.previousElementSibling.stepUp(); this.form.requestSubmit();" aria-label="Increase quantity">+</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="cart-price">${{ it.total }}</div>
+                <form method="post" action="{% url 'app1:remove-from-cart' it.product.pk %}" style="display:inline">
+                  {% csrf_token %}
+                  <button class="icon-btn trash" aria-label="Remove item"><i class="fas fa-trash"></i></button>
+                </form>
+              </div>
+            </article>
+          {% endfor %}
+        <p class="continue"><a href="{% url 'app1:shop' %}" class="muted">‹ Continue Shopping</a></p>
+        {% else %}
+        <p>Your cart is empty. <a href="{% url 'app1:shop' %}">Start shopping</a>.</p>
+        {% endif %}
+
+      </div>
+
+      <aside class="order-summary">
+          <div class="summary-card card">
+            <h4>Order Summary</h4>
+            <div class="summary-row"><span>Subtotal</span><span>${{ subtotal }}</span></div>
+            <div class="summary-row"><span>Shipping</span><span class="muted">Free</span></div>
+            <div class="summary-total"><span>Total</span><span>${{ subtotal }}</span></div>
+
+            <div class="summary-actions">
+              <a class="btn btn-primary" href="{% url 'app1:checkout' %}" style="width:100%">Proceed to Checkout</a>
+              <form method="post" action="{% url 'app1:clear-cart' %}">
+                {% csrf_token %}
+                <button class="btn btn-ghost" style="width:100%;margin-top:10px">Clear Cart</button>
+              </form>
+            </div>
+
+            <ul class="summary-features">
+              <li><i class="fa-solid fa-lock" style="color:var(--gold)"></i> Secure Payment</li>
+              <li><i class="fa-solid fa-gift" style="color:var(--gold)"></i> Luxury Packaging</li>
+              <li><i class="fa-solid fa-award" style="color:var(--gold)"></i> Lifetime Warranty</li>
+            </ul>
+          </div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+{% endblock %}

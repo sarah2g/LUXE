@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Luxe Bijoux — Home{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero reveal">
+      <div class="hero-overlay"></div>
+      <div class="container hero-inner">
+        <p class="eyebrow">NEW COLLECTION 2026</p>
+        <h1>Timeless Elegance<br><span>Crafted to Perfection</span></h1>
+        <p class="lead">Discover our exquisite collection of handcrafted jewelry, where every piece tells a unique story of luxury and sophistication.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#">Explore Collection</a>
+          <a class="btn btn-ghost" href="#">View Collections</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="features container reveal">
+      <div class="feature">
+        <i class="fa-solid fa-award fa-2x"></i>
+        <h4>Lifetime Warranty</h4>
+        <p>Every piece comes with a lifetime warranty for your peace of mind.</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-gift fa-2x"></i>
+        <h4>Luxury Packaging</h4>
+        <p>Beautifully packaged and ready to gift or cherish.</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-hands-heart fa-2x"></i>
+        <h4>Handcrafted Quality</h4>
+        <p>Each piece is meticulously crafted by master artisans.</p>
+      </div>
+    </section>
+
+    <section class="categories container reveal">
+      <h2>Shop by Category</h2>
+      <p class="muted">Explore our curated collections designed to celebrate every moment</p>
+      <div class="grid categories-grid">
+        <a class="card category-card reveal" href="#"><i class="fa-regular fa-gem"></i><span>Rings</span><small>45 Products</small></a>
+        <a class="card category-card reveal" href="#"><i class="fa-solid fa-heart"></i><span>Necklaces</span><small>32 Products</small></a>
+        <a class="card category-card reveal" href="#"><i class="fa-solid fa-crown"></i><span>Bracelets</span><small>28 Products</small></a>
+        <a class="card category-card reveal" href="#"><i class="fa-solid fa-bolt"></i><span>Earrings</span><small>38 Products</small></a>
+      </div>
+    </section>
+
+    <section class="featured container reveal">
+      <h2>Featured Collection</h2>
+      <p class="muted">Handpicked pieces that embody timeless elegance and modern sophistication</p>
+
+      <div class="grid products-grid">
+        {% for p in products %}
+        <article class="card product-card reveal">
+          <div class="media" style="background-image: url('{% if p.image %}{{ p.image.url }}{% else %}https://via.placeholder.com/400x280{% endif %}'); background-size:cover; background-position:center; min-height:180px; position:relative;">
+            <form method="post" action="{% url 'app1:wishlist-add' %}" class="wishlist-form" style="display:inline">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ p.pk }}">
+              <input type="hidden" name="next" value="{{ request.path }}">
+              <button class="wishlist icon-btn" aria-label="Add to wishlist" title="Add to favorites" data-product-id="{{ p.pk }}">
+                {% if wishlist_ids and p.pk in wishlist_ids %}
+                  <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                {% else %}
+                  <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                {% endif %}
+              </button>
+            </form>
+            <div class="card-cta">
+              <form method="post" action="{% url 'app1:add-to-cart' %}">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ p.pk }}">
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button class="btn btn-primary add-to-cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+              </form>
+            </div>
+          </div>
+          <div class="card-body">
+            <small class="category">{% if p.category %}{{ p.category.name }}{% else %}-{% endif %}</small>
+            <h3 class="product-title">{{ p.name }}</h3>
+            <p class="price">${{ p.price }}</p>
+          </div>
+        </article>
+        {% empty %}
+        <p>No featured products yet.</p>
+        {% endfor %}
+      </div>
+
+      <div class="center"><a class="btn btn-primary" href="{% url 'app1:shop' %}">View All Products</a></div>
+    </section>
+
+    <section class="testimonials container reveal">
+      <h2>What Our Customers Say</h2>
+      <p class="muted">Join thousands of satisfied customers who trust Luxe Bijoux</p>
+      <div class="grid testimonials-grid">
+        <blockquote class="card review reveal">
+          <p>“Absolutely stunning quality! The craftsmanship is exquisite and the packaging made it feel even more special.”</p>
+          <cite>— Sophie Anderson</cite>
+        </blockquote>
+        <blockquote class="card review reveal">
+          <p>“I’ve never received so many compliments on a piece of jewelry. Luxe Bijoux has earned a customer for life!”</p>
+          <cite>— Emily Chen</cite>
+        </blockquote>
+        <blockquote class="card review reveal">
+          <p>“The perfect blend of modern elegance and timeless beauty. Each piece tells a story.”</p>
+          <cite>— Isabella Martinez</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="newsletter reveal">
+      <div class="container newsletter-inner">
+        <h3>Join Our Exclusive Circle</h3>
+        <p class="muted">Subscribe to receive exclusive offers, style tips, and be the first to know about new collections</p>
+        <form class="subscribe-form" action="#">
+          <input type="email" placeholder="Enter your email" aria-label="Email address">
+          <button class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+{% endblock %}

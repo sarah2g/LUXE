@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Confirmation — Luxe Bijoux{% endblock %}
+
+{% block content %}
+<main>
+  <section class="container reveal" style="padding:36px 0">
+    <div class="card" style="max-width:760px;margin:0 auto;padding:28px;text-align:center">
+      <div style="font-size:28px;color:var(--gold);margin-bottom:6px">✅</div>
+      <h1>Thank you for your order</h1>
+      <p class="muted">Your order <strong>{{ order.order_number }}</strong> has been received.</p>
+
+      <div style="margin-top:18px;text-align:left">
+        <h3>Order details</h3>
+        <ul style="list-style:none;padding:0">
+          {% for it in items %}
+            <li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0efef">
+              <div>{{ it.name }} <small class="muted">×{{ it.quantity }}</small></div>
+              <div>${{ it.price|floatformat:2 }}</div>
+            </li>
+          {% endfor %}
+        </ul>
+        <div style="display:flex;justify-content:space-between;margin-top:12px;font-weight:700">Total <span>${{ order.total }}</span></div>
+      </div>
+
+      <div style="margin-top:18px">
+        <a class="btn btn-primary" href="{% url 'app1:shop' %}">Continue Shopping</a>
+        <a class="btn btn-ghost" href="{% url 'app1:admin-orders' %}">View in Admin</a>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

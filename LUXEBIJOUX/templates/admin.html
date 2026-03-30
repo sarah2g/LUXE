@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}LUXE Admin — Dashboard{% endblock %}
+
+{% block body_attrs %}class="admin-body"{% endblock %}
+
+{% block content %}
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="admin-brand">LUXE <span>ADMIN</span></div>
+    <div class="admin-search"><input placeholder="Search..." aria-label="Search"></div>
+    <nav class="admin-nav">
+      <a class="active" href="{% url 'app1:admin-dashboard' %}"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <a href="{% url 'app1:admin-products' %}"><i class="fa-solid fa-box"></i> Products</a>
+      <a href="{% url 'app1:admin-orders' %}"><i class="fa-solid fa-cart-shopping"></i> Orders</a>
+    </nav>
+    <div class="admin-sidebar-foot">
+      <button class="btn btn-ghost">Dark Mode</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="top-left">
+        <h2>Dashboard Overview</h2>
+        <p class="muted">Welcome back! Here's what's happening with your store today.</p>
+      </div>
+      <div class="top-right">
+        <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+        <div class="admin-user"><img src="https://via.placeholder.com/36" alt="Admin avatar"><span>Admin User</span></div>
+      </div>
+    </header>
+
+    <section class="admin-content">
+      <div class="metrics-grid">
+        <div class="admin-card metric">
+          <small>Total Sales</small>
+          <div class="metric-val">$45,280 <span class="small-up">+12.5%</span></div>
+        </div>
+        <div class="admin-card metric">
+          <small>Orders</small>
+          <div class="metric-val">234 <span class="small-up">+8.2%</span></div>
+        </div>
+        <div class="admin-card metric">
+          <small>Customers</small>
+          <div class="metric-val">1,842 <span class="small-up">+16.7%</span></div>
+        </div>
+        <div class="admin-card metric">
+          <small>Revenue</small>
+          <div class="metric-val">$89,750 <span class="small-up">+23.1%</span></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="admin-card chart-card">
+          <h4>Sales Analytics</h4>
+          <div class="chart placeholder" aria-hidden="true">(chart)</div>
+        </div>
+        <div class="admin-card chart-card">
+          <h4>Weekly Orders</h4>
+          <div class="chart placeholder" aria-hidden="true">(chart)</div>
+        </div>
+      </div>
+
+      <div class="main-grid">
+        <div class="admin-card recent-orders">
+          <h4>Recent Orders</h4>
+          <table class="orders-table">
+            <thead>
+              <tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Price</th><th>Status</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>#ORD-001</td><td>Emma Watson</td><td>Eternal Diamond Ring</td><td>$3,499</td><td><span class="status delivered">Delivered</span></td><td>Mar 26, 2026</td></tr>
+              <tr><td>#ORD-002</td><td>Olivia Brown</td><td>Golden Symphony Necklace</td><td>$2,899</td><td><span class="status pending">Pending</span></td><td>Mar 27, 2026</td></tr>
+              <tr><td>#ORD-003</td><td>Sophia Lee</td><td>Rose Gold Elegance Bracelet</td><td>$1,799</td><td><span class="status delivered">Delivered</span></td><td>Mar 27, 2026</td></tr>
+              <tr><td>#ORD-004</td><td>Ava Martinez</td><td>Pearl Essence Necklace</td><td>$1,599</td><td><span class="status cancelled">Cancelled</span></td><td>Mar 28, 2026</td></tr>
+              <tr><td>#ORD-005</td><td>Isabella Garcia</td><td>Diamond Drop Earrings</td><td>$2,299</td><td><span class="status pending">Pending</span></td><td>Mar 28, 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="admin-card top-products">
+          <h4>Top Products</h4>
+          <ul>
+            <li><img src="https://via.placeholder.com/48" alt=""><div><strong>Eternal Diamond Ring</strong><small>156 sales</small></div><div class="price">$45,844</div></li>
+            <li><img src="https://via.placeholder.com/48" alt=""><div><strong>Golden Symphony Necklace</strong><small>124 sales</small></div><div class="price">$35,476</div></li>
+            <li><img src="https://via.placeholder.com/48" alt=""><div><strong>Diamond Drop Earrings</strong><small>98 sales</small></div><div class="price">$25,302</div></li>
+          </ul>
+        </aside>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+{% endblock %}

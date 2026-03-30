@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Luxe Bijoux — Favorites{% endblock %}
+
+{% block content %}
+<main>
+  <section class="hero hero-favorites reveal">
+    <div class="container hero-inner">
+      <div style="text-align:center">
+        <i class="fa-regular fa-heart" style="font-size:28px;color:#b76e79"></i>
+        <h1>Your Favorites</h1>
+        <p class="muted">6 treasures saved</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container reveal">
+    <div class="grid products-grid" id="favoritesList">
+      {% if items %}
+        {% for p in items %}
+        <article class="card product-card reveal" data-product-id="{{ p.pk }}">
+          <div class="media" style="background-image: url('{% if p.image %}{{ p.image.url }}{% else %}https://via.placeholder.com/400x280{% endif %}'); background-size:cover; background-position:center; min-height:220px; position:relative;">
+            <form method="post" action="{% url 'app1:wishlist-remove' p.pk %}" class="remove-wishlist-form" style="display:inline">
+              {% csrf_token %}
+              <button class="wishlist icon-btn" aria-label="Remove from wishlist" title="Remove" data-product-id="{{ p.pk }}"><i class="fa-solid fa-heart"></i></button>
+            </form>
+            <div class="card-cta">
+              <form method="post" action="{% url 'app1:add-to-cart' %}">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ p.pk }}">
+                <button class="btn btn-primary add-to-cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+              </form>
+            </div>
+          </div>
+          <div class="card-body">
+            <small class="category">{% if p.category %}{{ p.category.name }}{% else %}-{% endif %}</small>
+            <h3 class="product-title">{{ p.name }}</h3>
+            <p class="price">${{ p.price }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      {% else %}
+        <p class="muted">You have no favorites yet. Click the heart on any product to add it here.</p>
+      {% endif %}
+    </div>
+
+    <div style="margin:48px 0">
+      <div class="card" style="padding:40px;text-align:center;box-shadow:0 18px 40px rgba(35,30,30,0.06)">
+        <div style="font-size:28px;color:var(--gold);margin-bottom:6px">✨</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:26px;margin:6px 0">Ready to Make Them Yours?</h3>
+        <p class="muted" style="max-width:720px;margin:0 auto 18px">Transform your favorites into cherished pieces. Each item comes with luxury packaging and a lifetime warranty.</p>
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:10px">
+          <a class="btn btn-primary" href="{% url 'app1:cart' %}">Add All to Cart</a>
+          <a class="btn btn-ghost" href="{% url 'app1:shop' %}">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+
+  <section class="hero hero-subtle">
+      <h3>Share Your Wishlist</h3>
+      <p class="muted">Let your loved ones know what makes your heart skip a beat</p>
+      <div style="margin-top:12px"><button class="btn btn-primary">Share Wishlist</button></div>
+    </section>
+  </section>
+</main>
+{% endblock %}

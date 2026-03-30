@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Luxe Bijoux — About{% endblock %}
+
+{% block content %}
+<main>
+  <section class="hero hero-about section-hero-about">
+    <div class="container hero-inner reveal">
+      <h1>Our Story</h1>
+      <p class="muted">Crafting timeless elegance since 2010</p>
+    </div>
+  </section>
+
+  <section class="container story section-story">
+    <div class="section-inner">
+      <h2 class="story-title">A Legacy of Elegance</h2>
+      <p class="muted story-text">Luxe Bijoux was born from a simple belief: that jewelry should be more than just an accessory—it should be a celebration of life’s most precious moments. Founded in 2010 by master jeweler Isabelle Laurent, our atelier has been dedicated to creating pieces that transcend trends and become cherished heirlooms.</p>
+      <p class="muted story-text">Each piece in our collection is meticulously handcrafted by skilled artisans who pour their passion and expertise into every detail. We source only the finest materials—ethically sourced diamonds, lustrous pearls, and precious metals—to ensure that every creation meets our exacting standards of quality and beauty.</p>
+    </div>
+  </section>
+
+  <section class="values section-values">
+    <div class="container">
+      <h3 class="section-title">Our Values</h3>
+      <p class="muted section-subtitle">The principles that guide everything we do</p>
+
+      <div class="grid values-grid">
+        <div class="value reveal">
+          <div class="value-icon"><i class="fa-solid fa-heart"></i></div>
+          <h4>Passion</h4>
+          <p class="muted">Every piece is crafted with love and dedication to bring your dreams to life</p>
+        </div>
+
+        <div class="value reveal">
+          <div class="value-icon"><i class="fa-solid fa-award"></i></div>
+          <h4>Excellence</h4>
+          <p class="muted">We use only the finest materials and master craftsmanship in every creation</p>
+        </div>
+
+        <div class="value reveal">
+          <div class="value-icon"><i class="fa-solid fa-people-group"></i></div>
+          <h4>Community</h4>
+          <p class="muted">Building lasting relationships with our customers is at the heart of what we do</p>
+        </div>
+
+        <div class="value reveal">
+          <div class="value-icon"><i class="fa-solid fa-star"></i></div>
+          <h4>Innovation</h4>
+          <p class="muted">Blending timeless elegance with modern design to create unique masterpieces</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="journey section-journey">
+    <div class="container">
+      <h3 class="section-title">Our Journey</h3>
+      <p class="muted section-subtitle">Milestones that shaped Luxe Bijoux</p>
+
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2010</div>
+          <div class="timeline-card">Luxe Bijoux founded in New York</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2014</div>
+          <div class="timeline-card">Opened flagship boutique on Fifth Avenue</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2018</div>
+          <div class="timeline-card">Launched sustainable jewelry initiative</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-card">Expanded to international markets</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-card">Celebrating 50,000+ satisfied customers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container craft section-craft">
+    <div class="craft-inner">
+      <div>
+        <div class="craft-media reveal">
+          <img src="{% static 'images/img.jpeg' %}" alt="Craftsmanship" class="craft-image">
+        </div>
+      </div>
+      <div>
+        <h3 class="section-title reveal">Craftsmanship at Its Finest</h3>
+        <p class="muted">Our master artisans combine traditional techniques passed down through generations with modern innovations to create jewelry that is both timeless and contemporary.</p>
+        <p class="muted story-text">Every piece undergoes rigorous quality control to ensure it meets our exacting standards. From the initial design sketch to the final polish, we pour our hearts into creating jewelry that will be treasured for generations.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}
