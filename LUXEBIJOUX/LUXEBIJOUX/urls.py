@@ -27,4 +27,6 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
+    # During development only: serve static and media files through Django
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT if hasattr(settings, 'STATIC_ROOT') else settings.STATICFILES_DIRS[0])
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
