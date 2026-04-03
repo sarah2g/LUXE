@@ -1,0 +1,17 @@
+# Minimal Render service spec. You can import this to Render or configure via the dashboard.
+# Replace placeholders and set environment variables in the Render dashboard (SECRET_KEY, DATABASE_URL, ALLOWED_HOSTS).
+services:
+  - type: web
+    name: luxe-web
+    env: python
+    plan: free
+  # Install dependencies and collect static files during the build step
+  buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+  startCommand: gunicorn LUXEBIJOUX.wsgi --log-file -
+    envVars:
+      - key: SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false
