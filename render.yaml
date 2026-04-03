@@ -5,10 +5,9 @@ services:
     name: luxe-web
     env: python
     plan: free
-  # Install setuptools first (ensures pkg_resources is present), then install requirements
-  # and collect static files during the build step.
-  # Pinning setuptools in requirements.txt is also recommended.
-  buildCommand: pip install setuptools==82.0.1 && pip install -r requirements.txt && python manage.py collectstatic --noinput
+  # Upgrade pip/setuptools/wheel first to ensure pkg_resources and wheel support,
+  # then install requirements and collect static files during the build step.
+  buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt && python manage.py collectstatic --noinput
   startCommand: gunicorn LUXEBIJOUX.wsgi --log-file -
     envVars:
       - key: SECRET_KEY
