@@ -83,6 +83,16 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = config('MEDIA_URL', default='/media/')
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Build a sensible default for CSRF_TRUSTED_ORIGINS from ALLOWED_HOSTS so
+# deployments that set ALLOWED_HOSTS to the deployed domain will automatically
+# trust that origin for CSRF when served over HTTPS. Local hosts are skipped.
+_default_csrf = ','.join([
+    f"https://{h}"
+    for h in ALLOWED_HOSTS
+    if h and h not in ("localhost", "127.0.0.1", "::1", "[::1]")
+])
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default=_default_csrf, cast=Csv())
+
 # Security
 SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=True, cast=bool)
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=True, cast=bool)
