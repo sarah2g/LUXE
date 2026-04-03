@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}LUXE Admin — Products{% endblock %}
 
@@ -66,7 +67,7 @@
           <tbody>
             {% for p in products %}
             <tr>
-              <td>{% if p.image %}<img src="{{ p.image.url }}" alt="{{ p.name }}" style="width:56px;height:56px;object-fit:cover;border-radius:6px">{% else %}<img src="https://via.placeholder.com/56" alt="">{% endif %}</td>
+              <td>{% if p.image %}<img src="{% static p.image.name %}" alt="{{ p.name }}" style="width:56px;height:56px;object-fit:cover;border-radius:6px">{% else %}<img src="https://via.placeholder.com/56" alt="">{% endif %}</td>
               <td>{{ p.name }}</td>
               <td>{% if p.category %}{{ p.category.name }}{% else %}-{% endif %}</td>
               <td class="price">${{ p.price }}</td>
@@ -82,7 +83,7 @@
                   data-category="{% if p.category %}{{ p.category.pk }}{% endif %}"
                   data-category-name="{% if p.category %}{{ p.category.name|escapejs }}{% endif %}"
                   data-description="{{ p.description|escapejs }}"
-                  data-image-url="{% if p.image %}{{ p.image.url }}{% endif %}"
+                  data-image-url="{% if p.image %}{% static p.image.name %}{% endif %}"
                   title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
                 <form method="post" action="{% url 'app1:admin-product-delete' p.pk %}" style="display:inline">{% csrf_token %}<button class="icon-btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button></form>
               </td>

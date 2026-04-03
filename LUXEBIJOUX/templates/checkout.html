@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Luxe Bijoux — Checkout{% endblock %}
 
@@ -71,7 +72,7 @@
             {% if items %}
               {% for it in items %}
                 <div class="order-item">
-                  <div class="thumb" style="background-image: url('{% if it.product.image %}{{ it.product.image.url }}{% else %}https://via.placeholder.com/80{% endif %}');background-size:cover;background-position:center;width:64px;height:64px;border-radius:6px"></div>
+                  <div class="thumb" style="background-image: url('{% if it.product.image %}{% static it.product.image.name %}{% else %}https://via.placeholder.com/80{% endif %}');background-size:cover;background-position:center;width:64px;height:64px;border-radius:6px"></div>
                   <div class="meta">
                     <div style="font-weight:700">{{ it.product.name }}</div>
                     <div class="muted small">Qty {{ it.quantity }}{% if it.product.category %} • {{ it.product.category.name }}{% endif %}</div>

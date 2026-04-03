@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Luxe Bijoux — Cart{% endblock %}
 
@@ -19,7 +20,7 @@
           {% for it in items %}
             <article class="cart-row card">
               <div class="cart-row-inner">
-                <div class="cart-thumb" style="width:120px;height:92px;border-radius:6px;background-size:cover;background-position:center; background-image: url('{% if it.product.image %}{{ it.product.image.url }}{% else %}https://via.placeholder.com/120x92{% endif %}')" aria-hidden="true"></div>
+                <div class="cart-thumb" style="width:120px;height:92px;border-radius:6px;background-size:cover;background-position:center; background-image: url('{% if it.product.image %}{% static it.product.image.name %}{% else %}https://via.placeholder.com/120x92{% endif %}')" aria-hidden="true"></div>
                 <div class="cart-meta">
                   <h3 class="cart-title">{{ it.product.name }}</h3>
                   <p class="muted small">{% if it.product.category %}{{ it.product.category.name }}{% endif %}</p>

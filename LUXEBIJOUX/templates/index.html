@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Luxe Bijoux — Home{% endblock %}
 
@@ -53,7 +54,7 @@
       <div class="grid products-grid">
         {% for p in products %}
         <article class="card product-card reveal">
-          <div class="media" style="background-image: url('{% if p.image %}{{ p.image.url }}{% else %}https://via.placeholder.com/400x280{% endif %}'); background-size:cover; background-position:center; min-height:180px; position:relative;">
+          <div class="media" style="background-image: url('{% if p.image %}{% static p.image.name %}{% else %}https://via.placeholder.com/400x280{% endif %}'); background-size:cover; background-position:center; min-height:180px; position:relative;">
             <form method="post" action="{% url 'app1:wishlist-add' %}" class="wishlist-form" style="display:inline">
               {% csrf_token %}
               <input type="hidden" name="product_id" value="{{ p.pk }}">

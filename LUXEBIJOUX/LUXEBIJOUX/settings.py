@@ -126,8 +126,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# Include the project `static/` folder and the committed `media/` folder
+# in STATICFILES_DIRS so collectstatic will pick up images that are stored
+# in the repo under `media/` (useful for assets committed to source control).
+# Note: user-uploaded media should use an external storage backend in prod
+# because Render's filesystem is ephemeral.
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    BASE_DIR / 'media',
 ]
 
 # Where `collectstatic` will collect static files for production
@@ -137,7 +143,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media (uploads)
-MEDIA_URL = '/media/'
+# MEDIA_URL should be different from STATIC_URL. Keep media at /media/ by default.
+# In production we serve committed product images via the static pipeline (templates
+# use the `static` tag with the file name). For user uploads configure an external
+# storage (S3) or a persistent disk.
+MEDIA_URL = config('MEDIA_URL', default='/media/')
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Basic security settings you can toggle via env vars (defaults are production-safe)
