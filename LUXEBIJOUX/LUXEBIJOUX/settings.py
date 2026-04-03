@@ -6,7 +6,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-secret')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
+# Provide a sensible default for local development so running the dev server
+# doesn't immediately return "Bad Request (400)" when DEBUG=False but no
+# ALLOWED_HOSTS are set in the environment. Deployments should set
+# ALLOWED_HOSTS via env var for production.
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,[::1]', cast=Csv())
 
 INSTALLED_APPS = [
     'django.contrib.admin',
