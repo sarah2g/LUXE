@@ -5,10 +5,10 @@ services:
     name: luxe-web
     env: python
     plan: free
-  # Upgrade pip/setuptools/wheel first to ensure pkg_resources and wheel support,
-  # then install requirements and collect static files during the build step.
-  buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt && python manage.py collectstatic --noinput
-  startCommand: python -m gunicorn LUXEBIJOUX.wsgi --chdir LUXEBIJOUX --bind 0.0.0.0:$PORT --log-file -
+    # Upgrade pip/setuptools/wheel first to ensure pkg_resources and wheel support,
+    # then install requirements and collect static files during the build step.
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: python -m gunicorn LUXEBIJOUX.wsgi --chdir LUXEBIJOUX --bind 0.0.0.0:$PORT --log-file -
     envVars:
       - key: SECRET_KEY
         sync: false
