@@ -10,7 +10,7 @@ services:
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
 
-    startCommand: python -m gunicorn LUXEBIJOUX.wsgi --chdir LUXEBIJOUX --bind 0.0.0.0:$PORT --log-file -
+    startCommand: bash start.sh
 
     envVars:
       - key: SECRET_KEY
