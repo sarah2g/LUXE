@@ -7,3 +7,6 @@ psycopg2-binary==2.9.7
 
 # Optional, keep for local formatting/sql parsing if needed
 sqlparse==0.5.5
+
+# Ensure pkg_resources is present at runtime (fixes ModuleNotFoundError in some PaaS envs)
+setuptools>=40.0.0
